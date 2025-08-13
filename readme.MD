@@ -1,6 +1,7 @@
 # ESPHome QMI8658 Component (ESP-IDF)
 
 ![ESPHome](https://img.shields.io/badge/ESPHome-External%20Component-blue)
+![Sensor](https://img.shields.io/badge/sensor-QMI8658-blue)
 ![ESP-IDF](https://img.shields.io/badge/Framework-ESP--IDF-green)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
