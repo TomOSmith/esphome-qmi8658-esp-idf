@@ -43,6 +43,9 @@ esphome:
   platform: ESP32
   board: esp32-s3-devkitc-1
   build_platform: esp-idf
+  
+external_components:
+  - source: github://TomOSmith/esphome-qmi8658-esp-idf/external_components/qmi8658_esphome
 
 sensor:
   - platform: qmi8658
