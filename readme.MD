@@ -50,11 +50,11 @@ external_components:
 sensor:
   - platform: qmi8658
     i2c_port: 0
-    sda_pin: GPIO21
-    scl_pin: GPIO22
+    sda_pin: GPIO15
+    scl_pin: GPIO14
     address: 0x6B
-    interrupt_pin: GPIO13
-    acceleration_range: 4G
+    interrupt_pin: GPIO21
+    acceleration_range: 2G
     acceleration_odr: 100HZ
     acceleration_lpf_mode: 0
     gyroscope_range: 64DPS
