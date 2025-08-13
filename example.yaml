@@ -1,0 +1,36 @@
+esphome:
+  name: qmi8658_test
+  platform: ESP32
+  board: esp32-s3-devkitc-1
+  build_platform: esp-idf
+
+external_components:
+  - source: github://TomOSmith/esphome-qmi8658-esp-idf/external_components/qmi8658_esphome
+
+sensor:
+  - platform: qmi8658
+    i2c_port: 0
+    sda_pin: GPIO21
+    scl_pin: GPIO22
+    address: 0x6B
+    interrupt_pin: GPIO13
+    acceleration_range: 4G
+    acceleration_odr: 100HZ
+    acceleration_lpf_mode: 0
+    gyroscope_range: 64DPS
+    gyroscope_odr: 100HZ
+    gyroscope_lpf_mode: 3
+    update_interval: 100ms
+
+    accel_x:
+      name: "Accel X"
+    accel_y:
+      name: "Accel Y"
+    accel_z:
+      name: "Accel Z"
+    gyro_x:
+      name: "Gyro X"
+    gyro_y:
+      name: "Gyro Y"
+    gyro_z:
+      name: "Gyro Z"

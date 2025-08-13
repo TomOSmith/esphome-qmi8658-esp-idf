@@ -1,0 +1,4 @@
+build:
+  platform: esp-idf
+  dependencies:
+    espp/qmi8658: "*"
