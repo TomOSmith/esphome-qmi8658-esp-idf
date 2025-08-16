@@ -5,6 +5,8 @@
 ![ESP-IDF](https://img.shields.io/badge/Framework-ESP--IDF-green)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
+**NOTE: This is work in progress and doesn't yet work.**
+
 An ESPHome external component for the [QMI8658](https://www.qstcorp.com/product/6-axis/qmi8658.html) 6-axis IMU sensor (accelerometer + gyroscope), built on the native ESP-IDF framework using the official [`espp/qmi8658`](https://components.espressif.com/components/espp/qmi8658) driver.
 
 ---
