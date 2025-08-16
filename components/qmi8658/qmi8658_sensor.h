@@ -14,10 +14,10 @@ class QMI8658Sensor : public PollingComponent {
 
   // YAML-configurable setters
   void set_i2c_port(int port) { i2c_port_ = port; }
-  void set_sda_pin(int pin) { sda_pin_ = pin; }
-  void set_scl_pin(int pin) { scl_pin_ = pin; }
+  void set_sda_pin(const std::string &pin);
+  void set_scl_pin(const std::string &pin);
   void set_address(uint8_t addr) { address_ = addr; }
-  void set_interrupt_pin(int pin) { interrupt_pin_ = static_cast<gpio_num_t>(pin); }
+  void set_interrupt_pin(const std::string &pin);
 
   void set_accel_range(const std::string &range);
   void set_accel_odr(const std::string &odr);
@@ -37,8 +37,8 @@ class QMI8658Sensor : public PollingComponent {
 
  protected:
   int i2c_port_;
-  int sda_pin_;
-  int scl_pin_;
+  gpio_num_t sda_pin_;
+  gpio_num_t scl_pin_;
   uint8_t address_;
   gpio_num_t interrupt_pin_ = GPIO_NUM_NC;
 

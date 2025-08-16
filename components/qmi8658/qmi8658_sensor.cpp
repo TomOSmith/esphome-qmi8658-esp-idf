@@ -6,13 +6,41 @@ namespace qmi8658 {
 
 static const char *TAG = "qmi8658";
 
+// Helper to parse GPIO pin from string or integer-like string
+gpio_num_t parse_gpio_pin(const std::string &pin_str) {
+  try {
+    if (pin_str.rfind("GPIO", 0) == 0) {
+      int pin_num = std::stoi(pin_str.substr(4));
+      return static_cast<gpio_num_t>(pin_num);
+    } else {
+      int pin_num = std::stoi(pin_str);
+      return static_cast<gpio_num_t>(pin_num);
+    }
+  } catch (...) {
+    ESP_LOGW(TAG, "Failed to parse GPIO pin from '%s'", pin_str.c_str());
+    return GPIO_NUM_NC;
+  }
+}
+
+void QMI8658Sensor::set_sda_pin(const std::string &pin) {
+  sda_pin_ = parse_gpio_pin(pin);
+}
+
+void QMI8658Sensor::set_scl_pin(const std::string &pin) {
+  scl_pin_ = parse_gpio_pin(pin);
+}
+
+void QMI8658Sensor::set_interrupt_pin(const std::string &pin) {
+  interrupt_pin_ = parse_gpio_pin(pin);
+}
+
 void QMI8658Sensor::setup() {
   ESP_LOGI(TAG, "Initializing QMI8658 sensor");
 
   espp::Qmi8658::Config config;
   config.i2c_port = static_cast<i2c_port_t>(i2c_port_);
-  config.sda_io_num = static_cast<gpio_num_t>(sda_pin_);
-  config.scl_io_num = static_cast<gpio_num_t>(scl_pin_);
+  config.sda_io_num = sda_pin_;
+  config.scl_io_num = scl_pin_;
   config.address = address_;
   config.accel_range = accel_range_;
   config.accel_odr = accel_odr_;
@@ -43,7 +71,6 @@ void QMI8658Sensor::update() {
   if (gyro_z_sensor) gyro_z_sensor->publish_state(data.gyro[2]);
 }
 
-// Range and ODR setters (string → enum mapping)
 void QMI8658Sensor::set_accel_range(const std::string &range) {
   if (range == "2G") accel_range_ = espp::Qmi8658::AccelRange::RANGE_2G;
   else if (range == "4G") accel_range_ = espp::Qmi8658::AccelRange::RANGE_4G;
